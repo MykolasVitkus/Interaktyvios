@@ -1,5 +1,5 @@
-# Interaktyvios technologijos
-Mykolas Vitkus IFF-7/1 2020
+# T120B168 Interaktyvios interneto technologijos
+Course project by Mykolas Vitkus IFF-7/1 2020
 
 ## How to run
 To build and run this application your system must have docker with docker-compose installed and enabled
