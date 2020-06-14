@@ -1,0 +1,75 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid stackable padded">
+        <div class="column">
+            <div class="ui segment">
+                <div id="content">
+
+
+                    <div class="ui stackable grid">
+                        <div class="sixteen wide column">
+                            <h1 class="ui header">
+                                <div class="content">
+                                    Sections
+                                </div>
+                                <a class="ui main-color right floated button" href="{{ path('admin_sections_add') }}">
+                                    Add Section
+                                </a>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+
+
+                    <div class="ui column stackable grid">
+                        <div class="column">
+
+                            <div class="ui attached segment">
+                                <table class="ui stackable very basic table" id="customers">
+                                    <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Content</th>
+                                        <th class="right aligned">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for section in sections %}
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                {{ section.title }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{ section.content }}
+                                            </div>
+                                        </td>
+                                        <td class="right aligned">
+                                            <div class="ui buttons">
+
+                                                <a class="ui labeled icon button" href="{{ path('admin_sections_edit', {'id': section.id }) }}">
+                                                    <i class="icon pencil"></i>
+                                                    Edit
+                                                </a>
+                                                <a class="ui labeled icon button" href="{{ path('admin_sections_delete', {'id': section.id }) }}">
+                                                    <i class="icon delete"></i>
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

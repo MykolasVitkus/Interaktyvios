@@ -1,0 +1,75 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid stackable padded">
+        <div class="column">
+            <div class="ui segment">
+                <div id="content">
+
+
+                    <div class="ui stackable grid">
+                        <div class="twelve wide column">
+                            <h1 class="ui header">
+                                <div class="content">
+                                    Social Links
+                                </div>
+
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+
+
+                    <div class="ui two column stackable grid">
+                        <div class="column">
+
+                            <h3 class="ui top attached button-header header">
+                                Active Links
+                                <a href="{{ path('admin_link_add') }}" class="ui main-color right floated button">
+                                    Add Link
+                                </a>
+                            </h3>
+                            <div class="ui attached segment">
+                                <table class="ui stackable very basic table" id="customers">
+                                    <thead>
+                                    <tr>
+                                        <th>Icon</th>
+                                        <th>Link</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for link in links %}
+                                    <tr>
+                                        <td>
+                                            <i class="{{ link.icon }} icon"></i>
+                                        </td>
+                                        <td>
+                                            <div  style="color: #ababab;">
+                                                {{ link.url }}
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="ui right floated buttons">
+
+
+                                                <a class="ui labeled icon button" href="{{ path('admin_link_delete', {'id': link.id }) }}">
+                                                    <i class="icon delete"></i>
+                                                    Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

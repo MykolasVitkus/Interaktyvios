@@ -1,0 +1,47 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid stackable padded">
+        <div class="column">
+            <div class="ui segment">
+                <div id="content">
+
+                    <div class="ui two column stackable grid">
+                        <div class="column">
+                            <div class="ui attached segment">
+                                <a href="{{ path('admin_messages') }}" class="ui labeled button">
+                                    <i class="left arrow icon"></i>
+                                    List
+                                </a>
+                                <div class="ui items">
+                                    <div class="item">
+                                        <div class="content">
+                                            <div class="header">{{ message.title }}</div>
+                                            <div class="meta">
+                                                <span class="price">
+                                                    From
+                                                    <strong>
+                                                        {{ message.name }}
+                                                    </strong>at
+                                                    <strong>
+                                                        {{ message.sentAt|date }}
+                                                    </strong>
+                                                </span>
+                                            </div>
+                                            <div class="description">
+                                                <p>{{ message.content }}</p>
+                                                <br/>
+                                                <span style="color: rgba(0,0,0,.6)">sent from <strong>{{ message.email }}</strong></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

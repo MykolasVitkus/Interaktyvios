@@ -1,0 +1,88 @@
+{% set currentPath = path(app.request.attributes.get('_route'),
+    app.request.attributes.get('_route_params')) %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Admin Panel{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+                integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
+                crossorigin="anonymous"
+        />
+        <link
+                rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+                integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ="
+                crossorigin="anonymous"
+        />
+        <link
+                rel="stylesheet"
+                href="/styles.css"
+        />
+    </head>
+
+
+    <body>
+        <div class="ui vertical inverted left visible main-color sidebar menu flex">
+            <div class="top-floated">
+                <a class="{% if currentPath == '/admin/statistics' %}active {% endif %} item" href="{{ path('admin_statistics') }}">
+                    <i class="chart pie icon"></i>
+                    Statistics
+                </a>
+                <a class="{% if currentPath == '/admin/sections' %}active {% endif %} item" href="{{ path('admin_sections') }}">
+                    <i class="file icon"></i>
+                    Sections
+                </a>
+                <a class="{% if currentPath == '/admin/links' %}active {% endif %} item" href="{{ path('admin_links') }}">
+                    <i class="facebook icon"></i>
+                    Social Links
+                </a>
+                <a class="{% if currentPath == '/admin/messages' %}active {% endif %} item" href="{{ path('admin_messages') }}">
+                    <i class="envelope icon"></i>
+                    Contact Messages
+                </a>
+                <a class="{% if currentPath == '/admin/configuration' %}active {% endif %} item" href="{{ path('admin_configuration') }}">
+                    <i class="cog icon"></i>
+                    Configuration
+                </a>
+            </div>
+            <div class="bottom-floated">
+                <div class="profile item">
+                    <div class="picture">
+                        <i class="ui user icon no-margin">
+
+                        </i>
+                    </div>
+                    <div class="picText">
+                        {{ app.user.username }}
+                        <a href="/logout">
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="pusher">
+            {% for message in app.flashes('success') %}
+                <div class="ui success message" style="margin-left: 1em; margin-top: 1em">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="ui negative message" style="margin-left: 1em; margin-top: 1em">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,67 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid stackable padded">
+        <div class="column">
+            <div class="ui segment">
+                <div id="content">
+                    <div class="ui stackable grid">
+                        <div class="twelve wide column">
+                            <h1 class="ui header">
+                                <div class="content">
+                                    Configuration
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+                    {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+                        <h4 class="ui dividing header">Personal Information</h4>
+                        <div class="field">
+                            {{ form_label(form.fullName) }}
+
+                            <div class="field">
+                                {{ form_widget(form.fullName, {'attr': {'placeholder': 'Full Name'}}) }}
+                            </div>
+                        </div>
+
+                    <div class="field">
+                        {{ form_label(form.personalEmail) }}
+                        <div class="field">
+                            {{ form_widget(form.personalEmail, {'attr': {'placeholder': 'email@placeholder.com'}}) }}
+                        </div>
+                    </div>
+
+                        <h4 class="ui dividing header">Site Configuration</h4>
+                        <div class="field">
+                            {{ form_label(form.site_title) }}
+                            <div class="field">
+                                {{ form_widget(form.site_title, {'attr': {'placeholder': 'Site Title'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.headline) }}
+                            <div class="field">
+                                {{ form_widget(form.headline, {'attr': {'placeholder': 'Headline'}}) }}
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            {{ form_label(form.imageFile) }}
+                            <div class="field">
+                                {{ form_widget(form.imageFile, {'attr': {'placeholder': 'Profile Image'}}) }}
+                            </div>
+                        </div>
+
+
+                        <button class="ui main-color button">
+                            Save
+                        </button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

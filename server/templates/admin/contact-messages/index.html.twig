@@ -1,0 +1,81 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid stackable padded">
+        <div class="column">
+            <div class="ui segment">
+                <div id="content">
+
+
+                    <div class="ui stackable grid">
+                        <div class="twelve wide column">
+                            <h1 class="ui header">
+                                <div class="content">
+                                    Contact Messages
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+
+
+                    <div class="ui two column stackable grid">
+                        <div class="column">
+
+                            <h3 class="ui top attached header">Contact Messages</h3>
+                            <div class="ui attached segment">
+                                <table class="ui stackable very basic table" id="customers">
+                                    <thead>
+                                    <tr>
+                                        <th>From</th>
+                                        <th>Sent At</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for message in messages %}
+                                    <tr>
+                                        <td>
+                                            <div>{{ message.name }}</div>
+                                        </td>
+                                        <td>
+                                            <div  style="color: #ababab;">
+                                                {{ message.sentAt|date }}
+
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {% if message.isRead %}
+                                                <i class="ui envelope open icon" style="color: gray"></i>
+                                            {% else %}
+                                                <i class="ui envelope icon" style="color: red"></i>
+                                            {% endif %}
+
+                                        </td>
+                                        <td>
+                                            <div class="ui right floated buttons">
+
+
+                                                <a class="ui labeled icon button" href="{{ path('admin_message', {'id': message.id}) }}">
+                                                    <i class="icon search"></i>
+                                                    View
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="ui right floated navigation">
+                                    {{ knp_pagination_render(messages) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

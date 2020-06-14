@@ -1,0 +1,197 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+    <div class="ui grid stackable padded">
+        <div class="column">
+            <div class="ui segment">
+                <div id="content">
+
+
+                    <div class="ui stackable grid">
+                        <div class="twelve wide column">
+                            <h1 class="ui header">
+                                <div class="content">
+                                    Statistics
+                                </div>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="ui divider"></div>
+
+                    <div class="ui grid">
+                        <div class="center aligned doubling four column row">
+                            <div class="column">
+                                <div class="ui red segment">
+                                    <div class="ui small statistic">
+                                        <div id="total-sales" class="value" style="padding-bottom: 10px;">
+                                            0
+                                        </div>
+                                        <div class="label">
+                                            Visitors this month
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="ui yellow segment">
+                                    <div class="ui small statistic">
+                                        <div id="new-orders" class="value" style="padding-bottom: 10px;">
+                                            0
+                                        </div>
+                                        <div class="label">
+                                            Visitors in total
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="ui blue segment">
+                                    <div class="ui small statistic">
+                                        <div id="new-customers" class="value" style="padding-bottom: 10px;">
+                                            {{ lastMonthMessagesCount }}
+                                        </div>
+                                        <div class="label">
+                                            Contact Messages this month
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="ui green segment">
+                                    <div class="ui small statistic">
+                                        <div id="average-order-value" class="value" style="padding-bottom: 10px;">
+                                            {{ messagesCount }}
+                                        </div>
+                                        <div class="label">
+                                            Contact Messages in total
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui two column stackable grid">
+                        <div class="column">
+
+                            <h3 class="ui top attached button-header header">
+                                Latest Contact Messages
+                                <a href="{{ path('admin_messages') }}" class="ui main-color right floated button">
+                                    View All
+                                </a>
+                            </h3>
+                            <div class="ui attached segment">
+                                <table class="ui stackable very basic table" id="customers">
+                                    <thead>
+                                    <tr>
+                                        <th>From</th>
+                                        <th>Sent At</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for message in messages %}
+                                        <tr>
+                                            <td>
+                                                <div>{{ message.name }}</div>
+                                            </td>
+                                            <td>
+                                                <div style="color: #ababab;">
+                                                    {{ message.sentAt|date }}
+
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {% if message.isRead %}
+                                                    <i class="ui envelope open icon" style="color: gray"></i>
+                                                {% else %}
+                                                    <i class="ui envelope icon" style="color: red"></i>
+                                                {% endif %}
+
+                                            </td>
+                                            <td>
+                                                <div class="ui right floated buttons">
+
+
+                                                    <a class="ui labeled icon button"
+                                                       href="{{ path('admin_message', {'id': message.id}) }}">
+                                                        <i class="icon search"></i>
+                                                        View
+                                                    </a>
+
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="column">
+
+                            <h3 class="ui top attached button-header header">
+                                Configuration
+                                <a href="{{ path('admin_configuration') }}" class="ui main-color right floated button">
+                                    Edit
+                                </a>
+                            </h3>
+
+                            <div class="ui attached segment">
+                                <table class="ui stackable very basic table" id="orders">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <div style="color: #ababab;">Site Title</div>
+                                        </td>
+                                        <td class="right aligned">
+                                            {{ configuration.siteTitle }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: #ababab;">Full Name</div>
+                                        </td>
+                                        <td class="right aligned">
+                                            {{ configuration.fullName }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: #ababab;">Headline</div>
+                                        </td>
+                                        <td class="right aligned">
+                                            {{ configuration.headline }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: #ababab;">Personal Email</div>
+                                        </td>
+                                        <td class="right aligned">
+                                            {{ configuration.personalEmail }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div style="color: #ababab;">Profile Picture</div>
+                                        </td>
+                                        <td class="right aligned">
+                                            <img src="/images/{{ configuration.imageName }}" alt="profile_picture" style="background-position: center; background-size: cover; background-repeat: no-repeat; width: 200px; height: 200px; border-radius: 50%;">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
