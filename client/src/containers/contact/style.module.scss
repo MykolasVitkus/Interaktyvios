@@ -1,0 +1,35 @@
+.contactFormContainer {
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.innerFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textInput {
+  height: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+
+.MuiFormControl-root {
+  margin: 12px !important;
+}
+
+.form > #outlined-basic {
+  margin: 12px !important;
+}
+
+.thankYou {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,0 +1,162 @@
+.appHeader {
+  z-index: 0;
+  background-color: #282c34;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  overflow: hidden;
+  position: relative;
+  right: 0;
+  left: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  min-height: 300px;
+}
+.navigationContainer {
+  position: relative;
+  z-index: 2;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.navigationText {
+  display: inline;
+  padding: 12px 12px;
+  height: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 8px;
+  position: relative;
+}
+.navigationText:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  width: 0;
+  bottom: 0px;
+  background: #fff;
+  height: 2px;
+  transition-property: width;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+.navigationText:hover:after,
+.navigationText:focus:after,
+.navigationText:active:after {
+  left: 0;
+  right: auto;
+  width: 100%;
+}
+
+.picture img{
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;  
+  border-radius: 50%;
+}
+
+.pictureContainer {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  align-items: center;
+}
+
+.nameContainer {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.nameText {
+  font-size: 3em;
+}
+.subnameText {
+  font-size: 2em;
+  font-weight: lighter;
+}
+$particleSize: 15vmin;
+$animationDuration: 6s;
+$amount: 20;
+.appHeader span {
+  width: $particleSize;
+  height: $particleSize;
+  border-radius: $particleSize;
+  backface-visibility: hidden;
+  position: absolute;
+  z-index: 0;
+  animation-name: move;
+  animation-duration: $animationDuration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  $colors: (
+          #181A24,
+          #242830,
+          #788585
+  );
+  @for $i from 1 through $amount {
+    &:nth-child(#{$i}) {
+      color: nth($colors, random(length($colors)));
+      top: random(100) * 1%;
+      left: random(100) * 1%;
+      animation-duration: (random($animationDuration * 10) / 10) * 1s + 10s;
+      animation-delay: random(($animationDuration + 10s) * 10) / 10 * -1s;
+      transform-origin: (random(50) - 25) * 1vw (random(50) - 25) * 1vh;
+      $blurRadius: (random() + 0.5) * $particleSize * 0.5;
+      $x: if(random() > 0.5, -1, 1);
+      box-shadow: ($particleSize * 2 * $x) 0 $blurRadius currentColor;
+    }
+  }
+}
+
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .headerContainer {
+    flex-direction: column-reverse;
+  }
+  .navigationContainer {
+    font-size: 15px;
+    margin-bottom: 16px;
+    margin-top: 16px;
+    justify-content: center;
+  }
+  .pictureContainer {
+    flex-direction: column;
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+  }
+  .picture {
+    margin-bottom: 16px;
+  }
+  .nameContainer {
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .nameText {
+    font-size: 2em;
+  }
+  .subnameText {
+    font-size: 1.75em;
+  }
+}

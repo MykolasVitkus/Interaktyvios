@@ -1,0 +1,25 @@
+@mixin section {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+}
+
+.sectionContainer {
+  &__light {
+    @include section;
+    background-color: #fff;
+  }
+  &__dark {
+    @include section;
+    background-color: #282c34;
+    color: #fff;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .innerSectionContainer {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
