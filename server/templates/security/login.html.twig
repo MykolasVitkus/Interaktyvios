@@ -1,40 +1,62 @@
-{% block title %}Log in!{% endblock %}
+<head>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
+            crossorigin="anonymous"
+    />
+</head>
+<body>
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+<div class="ui middle aligned center aligned grid" style="margin-top: 200px">
+    <div class="four wide column">
+        <h2 class="ui image header">
+            <div class="content">
+                Log-in to your account
+            </div>
+        </h2>
+        <form class="ui large form" method="post">
+            {% if error %}
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header" style="text-align: left">
+                        There was a problem
+                    </div>
+                    <p style="text-align: left">{{ error.messageKey|trans(error.messageData, 'security') }}
+                    </p></div>
+            {% endif %}
+            <div class="ui stacked segment">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                    </div>
+                </div>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" name="password" id="inputPassword" class="form-control" required>
+                    </div>
+                </div>
+                <button class="ui fluid large violet submit button" id="login">Login</button>
+            </div>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <div class="ui error message"></div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
+        </form>
+    </div>
+</div>
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-{% endblock %}
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<script>
+    $('.close.icon').on('click', function () {
+        $(this).closest(".ui.negative.message").remove();
+    })
+</script>

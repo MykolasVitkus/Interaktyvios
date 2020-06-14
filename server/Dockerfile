@@ -51,4 +51,11 @@ RUN sed -i "/<\/VirtualHost>/ i\Options FollowSymLinks" /etc/apache2/sites-avail
 COPY ./ /var/www/html
 RUN mkdir /var/www/html/var
 RUN chmod -R 777 /var/www/html/var
-#COPY php.ini /usr/local/etc/php/conf.d
+
+WORKDIR /build
+RUN composer config --global process-timeout 0
+COPY ./composer.json /build
+COPY ./composer.lock /build
+RUN composer install --no-scripts --no-autoloader --no-interaction -o
+COPY ./ /build
+RUN composer dump-autoload

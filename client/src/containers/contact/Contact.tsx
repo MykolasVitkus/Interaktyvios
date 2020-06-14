@@ -56,26 +56,29 @@ const Contact = () => {
 
   const validate = () => {
     let error = false;
+    let errors: ContactMessage = {
+      name: '',
+      email: '',
+      title: '',
+      content: ''
+    };
     if (!state.name) {
       error = true;
-      setErrors({ ...errors, name: 'Your name must not be empty' })
-      console.log(errors);
+      errors = { ...errors, name: 'Your name must not be empty' };
     }
     if (!state.email) {
       error = true;
-      setErrors({ ...errors, email: 'Your email must not be empty' })
-      console.log(errors);
+      errors = { ...errors, email: 'Your email must not be empty' };
     }
     if (!state.title) {
       error = true;
-      setErrors({ ...errors, title: 'Title must not be empty' })
-      console.log(errors);
+      errors = { ...errors, title: 'Title must not be empty' };
     }
     if (!state.content) {
       error = true;
-      setErrors({ ...errors, content: 'Message content must not be empty' })
-      console.log(errors);
+      errors = { ...errors, content: 'Message content must not be empty' };
     }
+    setErrors(errors);
     return error;
   };
 
@@ -107,7 +110,6 @@ const Contact = () => {
   const handleSave = () => {
     clearFormErrors();
     const failedValidation = validate();
-    console.log(errors);
     if (!failedValidation) {
       createContactMessage(state).then((response) => {
         if (response === 'Created') {
