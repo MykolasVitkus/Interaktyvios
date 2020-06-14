@@ -10,10 +10,12 @@ If you have docker installed, simply run this command from root project director
 
 ``$ docker-compose up -d``
 
-After executing this command(it can take some time to finish), 3 containers should be initialized and running (client, server and mongodb)
+After executing this command(it can take some time to finish), 3 containers should be initialized and running on development environment (client, server and mongodb)
 
 Application is then accessible on port `3001` and Admin panel on port `8080`
 
 To load some test data into your application run this command:
 
 ``$ docker-compose exec server composer reset-db``
+
+This command loads a base `admin:admin` user to access the admin panel
